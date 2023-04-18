@@ -1,0 +1,11 @@
+{% load menu_items %}
+{% if sub_menu_items %}
+    <ul class="submenu">
+    {% for item in sub_menu_items %}
+        <li>
+            <a href="#">{{ item.title }}</a>
+            {% sub_menu item %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
