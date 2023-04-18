@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.title}}{% endblock title %}{{post.title}}
+
+{% block content %}
+    <h3>{{post.title}}</h3>
+    <p>{{post.body}}</p>
+    <p>{{post.created}}</p>
+    
+    {% if post.category.parent_id %}
+        <a href="{% url 'blog:categories' post.category.parent_id %}">Назад</a>
+    {% else %}
+        <a href="{% url 'blog:categories' post.category_id %}">Назад</a>
+    {% endif %}
+
+{% endblock content %}
