@@ -7,4 +7,4 @@ admin.site.register(Categories)
 
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title', )}
+    prepopulated_fields = {"slug": ("title",)}

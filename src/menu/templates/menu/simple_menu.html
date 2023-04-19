@@ -4,7 +4,7 @@
 
 <h5>{{ menu.title|upper}}</h5>
 {% if menu.categories %}
-<ul id="myUl">
+<ul id="menus">
     {% for item in menu.categories.all %}
         {% if item.child_category.exists %}
             <li>
@@ -19,3 +19,4 @@
     {% endfor %}
 </ul>
 {% endif %}
+<br/>

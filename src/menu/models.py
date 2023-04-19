@@ -11,6 +11,6 @@ class Menu(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Menu'
-        verbose_name_plural = 'Menu'
-        ordering = ['title']
+        verbose_name = "Menu"
+        verbose_name_plural = "Menu"
+        ordering = ["title"]
