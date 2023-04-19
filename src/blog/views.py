@@ -1,26 +1,28 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
 from .models import Categories, Posts
 
 
-def index(request):
-    categories = Categories.objects.all()
-    context = {'categories': categories}
-    return render(request, 'blog/index.html', context=context)
+class IndexView(ListView):
+    queryset = Categories.objects.filter(parent__isnull=True)
+    template_name = 'blog/index.html'
+    context_object_name = 'categories'
 
-def detail_category(request, id=None):
-    if id is None:
-        return redirect('blog:index')
 
-    category = get_object_or_404(Categories, id=id)
-    subcategories = category.child_category.all()
-    context = {
-        'category': category,
-        'subcategories': subcategories
-    }
-    return render(request, 'blog/category_detail.html', context)
+class CategoryDetailView(DetailView):
+    model = Categories
+    template_name = 'blog/category_detail.html'
+    context_object_name = 'category'
 
-def show_post(request, post_slug):
-    post = get_object_or_404(Posts, slug=post_slug)
-    context = {'post': post}
-    return render(request, 'blog/post_detail.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subcategories'] = context['category'].child_category.all()
+        return context
+
+
+class PostDetailView(DetailView):
+    model = Posts
+    slug_field = 'slug'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'post'
+    template_name = 'blog/post_detail.html'

@@ -15,6 +15,7 @@ class Categories(models.Model):
         verbose_name_plural = 'Categories'
         ordering = ['name']
 
+
 class Posts(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
