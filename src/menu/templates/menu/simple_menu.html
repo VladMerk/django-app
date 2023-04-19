@@ -1,0 +1,21 @@
+{% load menu_items %}
+{% load static %}
+
+
+<h5>{{ menu.title|upper}}</h5>
+{% if menu.categories %}
+<ul id="myUl">
+    {% for item in menu.categories.all %}
+        {% if item.child_category.exists %}
+            <li>
+                <span class="caret">
+                    <a href="{% url 'blog:categories' item.id %}">{{item.name}}</a>
+                </span>
+                {% sub_menu item %}
+            </li>
+        {% else %}
+            <li><a href="{% url 'blog:categories' item.id %}">{{item.name}}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}

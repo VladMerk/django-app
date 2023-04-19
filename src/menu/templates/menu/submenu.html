@@ -1,11 +1,17 @@
 {% load menu_items %}
+
 {% if sub_menu_items %}
-    <ul class="submenu">
+    <ul class="nested">
     {% for item in sub_menu_items %}
-        <li>
-            <a href="#">{{ item.title }}</a>
+        {% if item.child_category.exists %}
+        <li><span class="caret">
+            <a href="{% url 'blog:categories' item.pk %}">{{ item.name }}</a>
+            </span>
             {% sub_menu item %}
         </li>
+        {% else %}
+        <li><a href="{% url 'blog:categories' item.pk %}">{{ item.name }}</a></li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% endif %}
