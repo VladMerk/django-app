@@ -8,11 +8,6 @@
 
 {% block title %}Главная{% endblock title %}
 
-{% block menus %}
-{% draw_menu 'main' %}
-{% draw_menu 'Computers' %}
-{% draw_menu 'Природа' %}
-{% endblock menus %}
 
 {% block content %}
 
@@ -23,6 +18,4 @@
 </ul>
 
 {% endblock content %}
-{% block js %}
-    <script src="{% static 'js/menu.js' %}"></script>
-{% endblock js %}
+

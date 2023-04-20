@@ -1,4 +1,6 @@
 <!doctype html>
+{% load static %}
+{% load menu_items %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
     {% block css %}{% endblock css %}
   </head>
   <body>
@@ -14,7 +17,9 @@
       {% include 'main_nav.html' %}
       <div class="row">
         <div class="col-md-2">
-          {% block menus %}{% endblock menus %}
+          {% block menus %}
+            {% draw_menu 'main' %}
+          {% endblock menus %}
         </div>
         <div class="col-md-8">
           {% block content %}
@@ -28,6 +33,8 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous">
     </script>
-    {% block js %}{% endblock js %}
   </body>
+  {% block js %}
+    <script src="{% static 'js/main.js' %}"></script>
+  {% endblock js %}
 </html>
